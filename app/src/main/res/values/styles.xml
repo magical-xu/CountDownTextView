@@ -1,7 +1,10 @@
 <resources>
 
   <!-- Base application theme. -->
-  <style name="AppTheme" parent="android:Theme.Light.NoTitleBar.Fullscreen">
+  <style name="AppTheme" parent="android:Theme.Light.NoTitleBar.Fullscreen" />
+
+  <style name="root_layout">
+    <item name="android:padding">15dp</item>
   </style>
 
 </resources>

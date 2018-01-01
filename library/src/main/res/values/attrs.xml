@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
   <declare-styleable name="CountDownTextView">
-    <attr name="text_size" format="dimension"/>
-    <attr name="text_color" format="color"/>
-    <attr name="tip_text" format="string"/>
-    <attr name="enable_background" format="reference"/>
-    <attr name="disable_background" format="reference"/>
-    <attr name="total_time" format="integer"/>
-    <attr name="gap_time" format="integer"/>
+    <attr format="dimension" name="text_size" />
+    <attr format="color" name="text_color" />
+    <attr format="string" name="tip_text" />
+    <attr format="string" name="init_text" />
+    <attr format="reference" name="enable_background" />
+    <attr format="reference" name="disable_background" />
+    <attr format="integer" name="total_time" />
+    <attr format="reference" name="anim_in" />
+    <attr format="reference" name="anim_out" />
   </declare-styleable>
 </resources>

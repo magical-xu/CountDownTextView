@@ -6,49 +6,56 @@ import android.view.View;
 import android.widget.Toast;
 import com.magicalxu.library.CountDownTextView;
 
-public class MainActivity extends Activity implements CountDownTextView.onReSend{
+public class MainActivity extends Activity implements CountDownTextView.onReSend {
 
-  CountDownTextView mBtnGreen;
-  CountDownTextView mBtnYellow;
-  CountDownTextView mBtnNormal;
+    CountDownTextView mBtnGreen;
+    CountDownTextView mBtnYellow;
+    CountDownTextView mBtnNormal;
+    CountDownTextView mBtnOrange;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-    initView();
-    initEvent();
-  }
+        initView();
+        initEvent();
+    }
 
-  private void initView() {
-    mBtnGreen = (CountDownTextView) findViewById(R.id.id_button_green);
-    mBtnYellow = (CountDownTextView) findViewById(R.id.id_button_yellow);
-    mBtnNormal = (CountDownTextView) findViewById(R.id.id_button_normal);
+    private void initView() {
+        mBtnGreen = findViewById(R.id.id_button_green);
+        mBtnYellow = findViewById(R.id.id_button_yellow);
+        mBtnNormal = findViewById(R.id.id_button_normal);
+        mBtnOrange = findViewById(R.id.id_button_orange);
+    }
 
-    mBtnGreen.setText("CountDownTimer");
-    mBtnYellow.setText("TextSwitcher");
-    mBtnNormal.setText("获取验证码");
-  }
+    private void initEvent() {
 
-  private void initEvent() {
+        mBtnGreen.setResendListener(this);
+        mBtnYellow.setResendListener(this);
+        mBtnNormal.setResendListener(this);
+        mBtnOrange.setResendListener(this);
+    }
 
-    mBtnGreen.setResendListener(this);
-    mBtnYellow.setResendListener(this);
-    mBtnNormal.setResendListener(this);
-  }
+    public void sendCode(View view) {
 
-  public void sendCode(View view) {
+        mBtnGreen.start();
+        mBtnYellow.start();
+        mBtnNormal.start();
+        mBtnOrange.start();
+        mBtnOrange.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(MainActivity.this, "接口请求失败！", Toast.LENGTH_SHORT).show();
+                mBtnOrange.reset();
+            }
+        }, 1500);
+    }
 
-    mBtnGreen.start();
-    mBtnYellow.start();
-    mBtnNormal.start();
-  }
+    @Override
+    public void onResend(View view) {
 
-  @Override
-  public void onResend(View view) {
-
-    Toast.makeText(this,"验证码已发送！",Toast.LENGTH_SHORT).show();
-    ((CountDownTextView) view).start();
-  }
+        Toast.makeText(this, "验证码已发送！", Toast.LENGTH_SHORT).show();
+        ((CountDownTextView) view).start();
+    }
 }
