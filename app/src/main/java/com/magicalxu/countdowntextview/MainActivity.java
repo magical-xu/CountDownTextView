@@ -58,4 +58,13 @@ public class MainActivity extends Activity implements CountDownTextView.onReSend
         Toast.makeText(this, "验证码已发送！", Toast.LENGTH_SHORT).show();
         ((CountDownTextView) view).start();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mBtnGreen.cancel();
+        mBtnYellow.cancel();
+        mBtnNormal.cancel();
+        mBtnOrange.cancel();
+    }
 }
