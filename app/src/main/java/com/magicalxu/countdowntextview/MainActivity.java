@@ -23,10 +23,10 @@ public class MainActivity extends Activity implements CountDownTextView.onReSend
     }
 
     private void initView() {
-        mBtnGreen = findViewById(R.id.id_button_green);
-        mBtnYellow = findViewById(R.id.id_button_yellow);
-        mBtnNormal = findViewById(R.id.id_button_normal);
-        mBtnOrange = findViewById(R.id.id_button_orange);
+        mBtnGreen = (CountDownTextView) findViewById(R.id.id_button_green);
+        mBtnYellow = (CountDownTextView) findViewById(R.id.id_button_yellow);
+        mBtnNormal = (CountDownTextView) findViewById(R.id.id_button_normal);
+        mBtnOrange = (CountDownTextView) findViewById(R.id.id_button_orange);
     }
 
     private void initEvent() {
