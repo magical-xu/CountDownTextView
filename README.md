@@ -8,7 +8,23 @@
 
 ### 使用方法   
 
-1.在XML文件中引用
+1.添加jitpack 并添加依赖  
+```
+root build.gradle:  
+allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}  
+  
+your project:  
+dependencies {
+	        compile 'com.github.magical-xu:CountDownTextView:v1.0.2'
+	}
+```
+
+2.在XML文件中引用
 
 ```
 <com.magicalxu.library.CountDownTextView
@@ -27,11 +43,13 @@
       magical:total_time="40" />
 ```
     
-2.开始计时调用 start() 方法  
+3.可用方法  
+
+  开始计时调用 start() 方法
   失败或手动取消调用 cancel()方法  
   重置为初始状态调用 reset()方法
 
-3.设置重发事件监听     
+4.设置重发事件监听     
 ```
 mBtnNormal.setResendListener(new CountDownTextView.onReSend() {
       @Override
