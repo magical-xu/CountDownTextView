@@ -130,7 +130,7 @@ public class CountDownTextView extends TextSwitcher
     /**
      * 重置为初始状态
      */
-    public void reset() {
+    public void reSet() {
         timer.cancel();
         countDownFinish = true;
         String show = initString;
