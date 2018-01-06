@@ -20,7 +20,7 @@ allprojects {
   
 your project:  
 dependencies {
-	        compile 'com.github.magical-xu:CountDownTextView:v1.0.2'
+	        compile 'com.github.magical-xu:CountDownTextView:v1.0.3'
 	}
 ```
 
@@ -46,7 +46,7 @@ dependencies {
 3.可用方法  
 开始计时调用 start() 方法  
 失败或手动取消调用 cancel()方法  
-重置为初始状态调用 reset()方法      
+重置为初始状态调用 reSet()方法      
 
 4.设置重发事件监听     
 ```
