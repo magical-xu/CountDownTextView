@@ -75,6 +75,14 @@ public class MainActivity extends Activity implements CountDownTextView.ISendLis
 
         switch (view.getId()) {
             case R.id.id_button_normal:
+
+                view.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "接口请求失败！", Toast.LENGTH_SHORT).show();
+                        mBtnNormal.reSet();
+                    }
+                }, 3000);
                 break;
             case R.id.id_button_wx:
                 break;
