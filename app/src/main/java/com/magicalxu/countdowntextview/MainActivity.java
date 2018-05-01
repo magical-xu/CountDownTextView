@@ -42,6 +42,12 @@ public class MainActivity extends Activity implements CountDownTextView.ISendLis
         mBtnTT.setSendListener(this);
         mBtnNormal.setSendListener(this);
         mBtnOrange.setSendListener(this);
+        mBtnOrange.setSendListener(new CountDownTextView.ISendListener() {
+            @Override
+            public void onSend(View view) {
+
+            }
+        });
 
         mObserveInput.addTextChangedListener(new TextWatcher() {
             @Override
