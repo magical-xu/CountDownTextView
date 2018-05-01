@@ -83,12 +83,13 @@ to avoid memory leak , u need to invoke #cancel() method in method like "onDesto
 
 ### change log  
 
--> v1.0.4(2018.5.2)  
-  refactory the name  
-  add some attribute     
+> v1.0.4(2018.5.2)  
+>>refactory the name      
+>>add some attribute     
 
 ### License  
 
+```  
  Copyright 2017 magical_xu <magicalxu666@gmail.com>
  
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -101,5 +102,6 @@ to avoid memory leak , u need to invoke #cancel() method in method like "onDesto
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  See the License for the specific language governing permissions and
- limitations under the License.
+ limitations under the License.  
+ ```  
       
