@@ -1,3 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <color name="c1">#333333</color>
+  <color name="c2">#b2b2b2</color>
+  <color name="c3">#E3DBDB</color>
+  <color name="c4">#EBEBEB</color>
 </resources>

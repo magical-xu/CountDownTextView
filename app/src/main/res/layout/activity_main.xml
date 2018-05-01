@@ -6,53 +6,18 @@
     android:orientation="vertical"
     style="@style/root_layout">
 
-  <com.magicalxu.library.CountDownTextView
-      android:id="@+id/id_button_green"
-      android:layout_width="250dp"
+  <!-- 基础样式 -->
+  <TextView
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginTop="15dp"
-      android:padding="15dp"
-      magical:anim_in="@anim/bottom_in"
-      magical:anim_out="@anim/top_out"
-      magical:disable_background="@drawable/shape_login_btn_bg_disable"
-      magical:enable_background="@drawable/shape_login_btn_bg"
-      magical:text_color="@android:color/holo_green_light"
-      magical:text_size="20sp"
-      magical:tip_text="获取验证码"
-      magical:total_time="20" />
-
-  <com.magicalxu.library.CountDownTextView
-      android:id="@+id/id_button_yellow"
-      android:layout_width="150dp"
-      android:layout_height="50dp"
-      android:layout_marginTop="20dp"
-      magical:anim_in="@android:anim/slide_in_left"
-      magical:anim_out="@android:anim/slide_out_right"
-      magical:disable_background="@drawable/shape_bg_yellow_disable"
-      magical:enable_background="@drawable/shape_bg_yellow_normal"
-      magical:init_text="TextSwitcher"
-      magical:text_color="@android:color/holo_red_light"
-      magical:text_size="12sp"
-      magical:tip_text="点击发送"
-      magical:total_time="40" />
-
-  <com.magicalxu.library.CountDownTextView
-      android:id="@+id/id_button_normal"
-      android:layout_width="150dp"
-      android:layout_height="50dp"
-      android:layout_marginTop="20dp"
-      magical:disable_background="@drawable/shape_login_btn_bg_disable"
-      magical:enable_background="@drawable/shape_login_btn_bg"
-      magical:text_color="@android:color/white"
-      magical:text_size="16sp"
-      magical:tip_text="点击重发"
-      magical:total_time="3" />
+      android:text="基础样式"
+      android:textColor="@android:color/holo_red_light"
+      android:textSize="15sp" />
 
   <LinearLayout
-      android:layout_width="300dp"
+      android:layout_width="match_parent"
       android:layout_height="44dp"
-      android:layout_marginTop="20dp"
-      android:background="@drawable/shape_bg_edit"
+      android:gravity="center_vertical"
       android:orientation="horizontal">
 
     <EditText
@@ -60,27 +25,186 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:background="@null"
-        android:hint="请输入验证码"
-        android:paddingLeft="20dp"
+        android:hint="请填写验证码"
+        android:inputType="number"
+        android:maxLength="6"
         android:paddingRight="10dp"
-        android:textColorHint="@android:color/darker_gray" />
+        android:textColor="@color/c1"
+        android:textColorHint="@color/c2"
+        android:textSize="15sp" />
 
     <com.magicalxu.library.CountDownTextView
-        android:id="@+id/id_button_orange"
+        android:id="@+id/id_button_normal"
         android:layout_width="100dp"
-        android:layout_height="match_parent"
-        magical:anim_in="@anim/bottom_in"
-        magical:anim_out="@anim/top_out"
-        magical:disable_background="@drawable/shape_disable"
-        magical:enable_background="@drawable/shape_enable" />
-
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        magical:text_size="14sp" />
   </LinearLayout>
 
-  <Button
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="0.5dp"
+      android:background="@color/c3" />
+
+  <!-- 微信样式 -->
+  <TextView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="20dp"
-      android:onClick="sendCode"
-      android:text="@string/send" />
+      android:text="微信样式"
+      android:textColor="@android:color/holo_red_light"
+      android:textSize="15sp" />
 
+  <LinearLayout
+      android:id="@+id/id_demo_wx"
+      android:layout_width="match_parent"
+      android:layout_height="44dp"
+      android:gravity="center_vertical"
+      android:orientation="horizontal"
+      android:paddingRight="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="验证码"
+        android:textColor="@color/c1"
+        android:textSize="16sp" />
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_weight="1"
+        android:background="@null"
+        android:hint="请填写验证码"
+        android:inputType="number"
+        android:maxLength="6"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/c1"
+        android:textColorHint="@color/c3"
+        android:textSize="15sp" />
+
+    <com.magicalxu.library.CountDownTextView
+        android:id="@+id/id_button_wx"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginLeft="15dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        magical:anim_in="@anim/bottom_in"
+        magical:anim_out="@anim/top_out"
+        magical:disable_background="@android:color/transparent"
+        magical:enable_background="@drawable/shape_wx_normal"
+        magical:gap_string_format="@string/wx_gap_format"
+        magical:text_color="@color/selector_verify_code_text_color"
+        magical:text_size="12sp"
+        magical:tip_text="获取验证码"
+        magical:total_time="10" />
+  </LinearLayout>
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="0.5dp"
+      android:background="#0dff00" />
+
+  <!-- 头条样式 -->
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:text="今日头条样式"
+      android:textColor="@android:color/holo_red_light"
+      android:textSize="15sp" />
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="44dp"
+      android:layout_marginTop="10dp"
+      android:background="@drawable/shape_tou_tiao_edit_bg"
+      android:gravity="center_vertical"
+      android:orientation="horizontal"
+      android:paddingLeft="22dp"
+      android:paddingRight="22dp">
+
+    <EditText
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@null"
+        android:hint="手机号"
+        android:inputType="phone"
+        android:maxLength="14"
+        android:textColor="@color/c1"
+        android:textColorHint="@color/c2"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="15dp"
+        android:background="@color/c2" />
+
+    <com.magicalxu.library.CountDownTextView
+        android:id="@+id/id_button_tt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:animateFirstView="false"
+        magical:anim_in="@anim/bottom_in"
+        magical:anim_out="@anim/top_out"
+        magical:gap_string_format="@string/tt_gap_format"
+        magical:init_text="发送验证码"
+        magical:text_color="@color/selector_verify_code_text_color"
+        magical:text_size="14sp"
+        magical:tip_text="重新发送"
+        magical:total_time="5" />
+  </LinearLayout>
+
+  <!-- 监听输入框 -->
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="20dp"
+      android:text="类抖音 监听输入框 变色"
+      android:textColor="@android:color/holo_red_light"
+      android:textSize="15sp" />
+
+  <LinearLayout
+      android:layout_width="300dp"
+      android:layout_height="44dp"
+      android:layout_marginTop="10dp"
+      android:background="@drawable/shape_bg_edit"
+      android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/id_observe_input"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@null"
+        android:hint="请输入验证码"
+        android:inputType="number"
+        android:maxLength="6"
+        android:paddingLeft="20dp"
+        android:paddingRight="10dp"
+        android:textColorHint="@color/c3"
+        android:textSize="15sp" />
+
+    <com.magicalxu.library.CountDownTextView
+        android:id="@+id/id_button_orange"
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        magical:anim_in="@android:anim/slide_in_left"
+        magical:anim_out="@android:anim/slide_out_right"
+        magical:disable_background="@drawable/shape_disable"
+        magical:enable_background="@drawable/shape_enable"
+        magical:text_color="@color/selector_verify_code_text_color"
+        magical:text_size="14sp"
+        magical:total_time="10" />
+  </LinearLayout>
 </LinearLayout>

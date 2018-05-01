@@ -17,6 +17,7 @@
 package com.magicalxu.library;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -38,11 +39,12 @@ public class CountDownTextView extends TextSwitcher
         implements TextSwitcher.ViewFactory, View.OnClickListener {
 
     private int TOTAL_MILLS;    //默认60s
-    private String tipString;   //提示文字
+    private String tipString;   //完成后的提示文字
     private String initString;  //初始文字
+    private String gapStringFormat;   //gap间隙提示
 
     private float TEXT_SIZE;    //默认16sp
-    private int TEXT_COLOR;     //默认白色
+    private ColorStateList mColorStateList; //默认黑色
 
     private int BgEnableResId;  //可用时背景
     private int BgDisableResId; //不可用时背景
@@ -51,7 +53,7 @@ public class CountDownTextView extends TextSwitcher
     private int animOut;        //文字退出动画
 
     private CountDownTimer timer;
-    private onReSend mListener;
+    private ISendListener mListener;
 
     private boolean countDownFinish;
 
@@ -84,13 +86,18 @@ public class CountDownTextView extends TextSwitcher
 
         //文字
         TEXT_SIZE = ta.getDimension(R.styleable.CountDownTextView_text_size, defaultTextSize);
-        TEXT_COLOR = ta.getColor(R.styleable.CountDownTextView_text_color, Color.WHITE);
+
+        //文字颜色
+        mColorStateList = ta.getColorStateList(R.styleable.CountDownTextView_text_color);
+        if (null == mColorStateList) {
+            mColorStateList = ColorStateList.valueOf(Color.BLACK);
+        }
 
         //背景
         BgEnableResId = ta.getResourceId(R.styleable.CountDownTextView_enable_background,
-                R.drawable.shape_login_btn_bg);
+                android.R.color.transparent);
         BgDisableResId = ta.getResourceId(R.styleable.CountDownTextView_disable_background,
-                R.drawable.shape_login_btn_bg_disable);
+                android.R.color.transparent);
 
         //动画
         animIn = ta.getResourceId(R.styleable.CountDownTextView_anim_in, android.R.anim.fade_in);
@@ -99,15 +106,24 @@ public class CountDownTextView extends TextSwitcher
         //总时长 （秒）
         TOTAL_MILLS = ta.getInteger(R.styleable.CountDownTextView_total_time, 60);
 
-        //提示及初始文字
+        //完成后的提示文字 默认为“点击重发”
         tipString = ta.getString(R.styleable.CountDownTextView_tip_text);
         if (TextUtils.isEmpty(tipString)) {
             tipString = getContext().getString(R.string.count_down_text_click_to_resend);
         }
+
+        //初始的提示文字 默认为“获取验证码”
         initString = ta.getString(R.styleable.CountDownTextView_init_text);
         if (TextUtils.isEmpty(initString)) {
             initString = getContext().getString(R.string.count_down_text_init);
         }
+
+        //间隙回调时 后缀文字 默认为“s”
+        gapStringFormat = ta.getString(R.styleable.CountDownTextView_gap_string_format);
+        if (TextUtils.isEmpty(gapStringFormat)) {
+            gapStringFormat = getContext().getString(R.string.count_down_gap_string_format);
+        }
+
         ta.recycle();
     }
 
@@ -133,9 +149,9 @@ public class CountDownTextView extends TextSwitcher
     public void reSet() {
         timer.cancel();
         countDownFinish = true;
-        String show = initString;
-        setText(show);
+        setText(initString);
         setBackgroundResource(BgEnableResId);
+        textHint(false);
     }
 
     /**
@@ -167,6 +183,7 @@ public class CountDownTextView extends TextSwitcher
         String show = tipString;
         setText(show);
         setBackgroundResource(BgEnableResId);
+        textHint(false);
     }
 
     /**
@@ -177,8 +194,18 @@ public class CountDownTextView extends TextSwitcher
     private void onGapCallback(long rest) {
 
         countDownFinish = false;
-        String show = rest / 1000 + "s";
-        setText(show);
+        String gap;
+        try {
+            gap = String.format(gapStringFormat, (rest / 1000));
+        } catch (Exception ex) {
+
+            gap = String.format(getContext().getString(R.string.count_down_gap_string_format),
+                    (rest / 1000));
+            ex.printStackTrace();
+        }
+
+        setText(gap);
+        textHint(true);
     }
 
     /**
@@ -190,9 +217,27 @@ public class CountDownTextView extends TextSwitcher
         setOutAnimation(getContext(), animOut);
     }
 
-    private int px2sp(float pxValue) {
-        final float fontScale = Resources.getSystem().getDisplayMetrics().scaledDensity;
-        return (int) (pxValue / fontScale + 0.5f);
+    /**
+     * 显示暗色还是亮色
+     * 暗色对应 unSelected 态颜色
+     * 亮色对应 selected 态颜色
+     *
+     * 间隙的回调都是暗色
+     * 默认起始和结束的回调是亮色
+     *
+     * 可以调用此方法改变默认行为
+     */
+    public void textHint(boolean hint) {
+        setSelected(hint);
+    }
+
+    /**
+     * 是否正在倒计时阶段
+     *
+     * @return true : 倒计时 false : 已完成
+     */
+    public boolean isProcessing() {
+        return !countDownFinish;
     }
 
     @Override
@@ -201,8 +246,8 @@ public class CountDownTextView extends TextSwitcher
         textView.setMaxLines(1);
         textView.setEllipsize(TextUtils.TruncateAt.END);
         textView.setGravity(Gravity.CENTER);
-        textView.setTextColor(TEXT_COLOR);
-        textView.setTextSize(px2sp(TEXT_SIZE));
+        textView.setTextColor(mColorStateList);
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, TEXT_SIZE);
         int padding = TypedValue.complexToDimensionPixelSize(10,
                 Resources.getSystem().getDisplayMetrics());
         textView.setPadding(padding, padding, padding, padding);
@@ -217,18 +262,18 @@ public class CountDownTextView extends TextSwitcher
     @Override
     public void onClick(View view) {
         if (countDownFinish && mListener != null) {
-            mListener.onResend(view);
+            mListener.onSend(view);
         }
     }
 
-    public interface onReSend {
-        void onResend(View view);
+    public interface ISendListener {
+        void onSend(View view);
     }
 
     /**
      * 重发事件
      */
-    public void setResendListener(onReSend listener) {
+    public void setSendListener(ISendListener listener) {
         this.mListener = listener;
     }
 }

@@ -5,6 +5,7 @@
     <attr format="color" name="text_color" />
     <attr format="string" name="tip_text" />
     <attr format="string" name="init_text" />
+    <attr format="string" name="gap_string_format" />
     <attr format="reference" name="enable_background" />
     <attr format="reference" name="disable_background" />
     <attr format="integer" name="total_time" />

@@ -1,4 +1,5 @@
 <resources>
   <string name="count_down_text_click_to_resend">点击重发</string>
   <string name="count_down_text_init">获取验证码</string>
+  <string name="count_down_gap_string_format">%s秒</string>
 </resources>
