@@ -1,4 +1,5 @@
-# CountDownTextView
+# CountDownTextView  
+#### [中文版](https://github.com/magical-xu/FlycoTabLayout/blob/master/README_CN.md)  
 A simple verify code countdown widget that using TextSwitcher and CountDownTimer.  
 
 ### Advantages  
@@ -39,7 +40,7 @@ allprojects {
   
 your project:  
 dependencies {
-	        compile 'com.github.magical-xu:CountDownTextView:the latest version'
+	        implementation 'com.github.magical-xu:CountDownTextView:v1.0.4.1'
 	     }
 ```
 
@@ -83,7 +84,7 @@ to avoid memory leak , u need to invoke #cancel() method in method like "onDesto
 
 ### change log  
 
-> v1.0.4(2018.5.2)  
+> v1.0.4.1(2018.5.2)  
 >>refactory the name      
 >>add some attribute     
 
