@@ -1,5 +1,5 @@
 # CountDownTextView  
-#### [中文版](https://github.com/magical-xu/CountDownTextView/README_CN.md)
+#### [中文版](https://github.com/magical-xu/CountDownTextView/raw/master/README_CN.md)
 A simple verify code countdown widget that using TextSwitcher and CountDownTimer.  
 
 ### Advantages  
