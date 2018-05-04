@@ -63,11 +63,11 @@ dependencies {
     
 3.对外方法
 
-[1] start() : 开始计时
-[2] cancel(): 取消计时，界面销毁时调用以防内存泄漏
-[3] reSet() : 重置为初始状态 ( not the parent method "reset()" )
-[4] textHint(): 设置文字为暗色：true 设置文字为亮色：false 需配合selector
-[5] isProcessing(): 是否正在计时
+[1] start() : 开始计时  
+[2] cancel(): 取消计时，界面销毁时调用以防内存泄漏  
+[3] reSet() : 重置为初始状态 ( not the parent method "reset()" )  
+[4] textHint(): 设置文字为暗色：true 设置文字为亮色：false 需配合selector  
+[5] isProcessing(): 是否正在计时  
 
 4.设置点击监听
 ```
